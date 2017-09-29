@@ -27,6 +27,6 @@ class AddFixedPriceToProducts extends Migration
     {
         Schema::table('products', function($table) {
             $table->dropColumn('fixed_price');
-        }
+        });
     }
 }

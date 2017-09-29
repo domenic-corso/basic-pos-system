@@ -56,9 +56,12 @@
 		<small class="form-text text-muted">This is useful for products with a single price such as food or retail products.</small>
 	</div>
 	<div class="btn-group">
-		<button type="submit" class="btn btn-primary">Save &amp; Add Another</button>
-		<button type="submit" class="btn btn-success">Save</button>
+		<input type="submit" class="btn btn-primary" name="add_another" value="Save & Add Another">
+		<input type="submit" class="btn btn-success" value="Save">
 	</div>
+
+	{{ method_field('put') }}
+	{{ csrf_field() }}
 </form>
 
 @endsection

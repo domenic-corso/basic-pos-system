@@ -1,5 +1,7 @@
 <?php
 
+use \Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,8 +37,8 @@ Route::get('/product/{$product}', function (Product $product) {
     return dd($product);
 });
 
-Route::put('/product/', function () {
-    return 'PUT /product';
+Route::put('/product/', function (Request $request) {
+	return 'lmao';
 });
 
 Route::post('/product/{$product}', function (Product $product) {
