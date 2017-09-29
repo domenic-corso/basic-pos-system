@@ -23,8 +23,8 @@ Route::get('/take-orders', function () {
     return view('take_orders');
 });
 
-Route::get('/new-product', function () {
-    return 'New Product Form';
+Route::get('/add-product', function () {
+    return view('add_product');
 });
 
 Route::get('/product-list', function () {
