@@ -3,9 +3,9 @@
 @section('app.content')
 
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Admin Panel</a>
+            <a class="navbar-brand" href="#">Basic POS System - Admin Panel</a>
         </div>
         <ul class="nav navbar-nav">
             <li>
