@@ -32,7 +32,7 @@ class CategoriesTableSeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Cold Drinks',
+            'name' => 'Bottled Drinks',
             'color' => '#65EBD4'
         ]);
     }
