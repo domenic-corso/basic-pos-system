@@ -2,19 +2,15 @@
 
 @section('app.content')
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-4">
     <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Basic POS System - Admin Panel</a>
+        <a class="navbar-brand" href="#">Basic POS System - Admin Panel</a>
+        <div class="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <a class="nav-item nav-link" href="{{ url('/add-product') }}">Add Product</a>
+                <a class="nav-item nav-link" href="{{ url('/product-list') }}">Modify Product</a>
+            </ul>
         </div>
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="{{ url('/new-product') }}">New Product</a>
-            </li>
-            <li>
-                <a href="{{ url('/product-list') }}">Modify Product</a>
-            </li>
-        </ul>
     </div>
 </nav>
 
