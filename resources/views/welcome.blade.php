@@ -4,6 +4,17 @@
 
 @section('app.content')
 
-how's it goin
+<div class="container">
+	<h1>Basic Pos System</h1>
+
+	<ul>
+		<li>
+			<a href="{{ url('/take-orders') }}">Take Orders</a>
+		</li>
+		<li>
+			<a href="{{ url('/admin-panel') }}">Admin Panel</a>
+		</li>
+	</ul>
+</div>
 
 @endsection
