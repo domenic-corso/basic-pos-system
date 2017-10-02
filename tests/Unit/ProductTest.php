@@ -30,8 +30,8 @@ class ProductTest extends TestCase
 
     public function testAcceptableUnacceptableName () {
     	$properties = self::getAccpetableProperties();
-    	$acceptableNames = array('Latte', 'Hot Chocolate', '2Burger', '2 Burger\'s', 'Hot Chips & Pie');
-    	$unacceptableNames = array('Latte!', '#2 Hot Dog', ' ', '', str_repeat('h', 61), null);
+    	$acceptableNames = array('Latte', 'Hot Chocolate', '2Burger', '2 Burger\'s', 'Hot Chips & Pie', 'pie');
+    	$unacceptableNames = array('Latte!', '#2 Hot Dog', ' ', '', str_repeat('h', 61), null, '2c');
 
     	foreach ($acceptableNames as $an) {
     		$properties['name'] = $an;
@@ -46,8 +46,8 @@ class ProductTest extends TestCase
 
     public function testAcceptableUnacceptableShortName () {
     	$properties = self::getAccpetableProperties();
-    	$acceptableShortNames = array('LATTEE', 'HOT CHOC', '2 BURG', '2 BURGER\'S', 'CHIPS & PIE');
-    	$unacceptableShortNames = array('LATTE!', '#2 HOT DOG', '', ' ', str_repeat('h', 13), null);
+    	$acceptableShortNames = array('LATTEE', 'HOT CHOC', '2 BURG', '2 BURGER\'S', 'CHIPS & PIE', 'PIE');
+    	$unacceptableShortNames = array('LATTE!', '#2 HOT DOG', '', ' ', str_repeat('h', 13), null, '2C');
 
     	foreach ($acceptableShortNames as $asn) {
     		$properties['short_name'] = $asn;

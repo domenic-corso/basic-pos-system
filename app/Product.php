@@ -33,28 +33,34 @@ class Product extends Model
 	}
 
 	/* Checks a given array of properties against the validator rules as well
-	as some business logic. */
-	public static function validateProduct (array $properties) : bool {
+	as some business logic. Returns an array of error messages. */
+	public static function validateWithErrors (array $properties) : array {
 		$validator = Validator::make($properties, self::getValidatorRules());
 
 		/* If the properties are not valid and no price information at all was given,
 		invalid Product. */
-		if (
-			$validator->fails() ||
-			empty($properties['price_definition_id']) && empty($properties['fixed_price'])
-		) {
-			return false;
+		if ($validator->fails()) {
+			return $validator->errors()->all();
 		}
 
-		return true;
+		if (empty($properties['price_definition_id']) && empty($properties['fixed_price'])) {
+			return array('You must choose either a price group or a fixed price.');
+		}
+
+		return array();
+	}
+
+	/* Calls 'validateWithErrors' but returns a boolean format. */
+	public static function validateProduct (array $properties) : bool {
+		return (count(self::validateWithErrors($properties)) == 0);
 	}
 
     private static function getValidatorRules () : array {
     	$namePattern = '/^[a-z\d &\']+$/i';
 
     	return [
-    		'name' => 'required|unique:products|max:60|filled|regex:'.$namePattern,
-    		'short_name' => 'required|unique:products|max:12|filled|regex:'.$namePattern,
+    		'name' => 'required|unique:products|min:3|max:60|filled|regex:'.$namePattern,
+    		'short_name' => 'required|unique:products|min:3|max:12|filled|regex:'.$namePattern,
     		'category_id' => 'required|integer|exists:categories,id',
     		'price_definition_id' => 'integer|exists:price_definitions,id|nullable',
     		'fixed_price' => 'numeric|min:0|max:50|nullable'
