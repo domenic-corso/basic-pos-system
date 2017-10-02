@@ -2,6 +2,16 @@
 
 @section('title', 'Add Product')
 
+@section('styles')
+
+<style type="text/css">
+	label {
+		font-weight: bold;
+	}
+</style>
+
+@endsection
+
 @section('admin.content')
 
 <h1>Add a New Product</h1>
@@ -16,7 +26,7 @@
 
 <form action="{{ url('/product') }}" method="post">
 	<div class="form-group">
-		<label for="category_id">Category:</label>
+		<label for="category_id">Category</label>
 		<select class="form-control" id="category_id" name="category_id">
 			<!-- Add a new option for each Category in the database -->
 			@foreach (\App\Category::all() as $category)
@@ -33,19 +43,22 @@
 		</select>
 	</div>
 	<div class="form-group">
-		<label for="name">Name:</label>
+		<label for="name">Name</label>
 		<input type="text" class="form-control" id="name" name="name" placeholder="i.e. Cappucino, Soft Drink, Beef Pie etc."
-		value="{{ Request::old('name') ? Request::old('name') : $product->name }}" />
+		value="{{ Request::old('name') ? Request::old('name') : $product->name }}" 
+		required minlength="3" maxlength="60" />
 	</div>
 	<div class="form-group">
-		<label for="short_name">Short Name:</label>
-		<input type="text" class="form-control" id="short_name" name="short_name" 
-		value="{{ Request::old('short_name') ? Request::old('short_name') : $product->short_name }}" />
+		<label for="short_name">Short Name</label>
+		<input type="text" class="form-control" id="short_name" name="short_name"  placeholder="Give a shortened name. This can be changed." 
+		value="{{ Request::old('short_name') ? Request::old('short_name') : $product->short_name }}"
+		minlength="3" maxlength="12" required />
 		<small class="form-text text-muted">This name is displayed on the buttons when taking orders.</small>
 	</div>
 	<div class="form-group">
 		<label for="price_definition_id">Price Group</label>
 		<select class="form-control" id="price_definition_id" name="price_definition_id">
+			<option value="" id="fixed_price_option">Use a fixed price</option>
 			<!-- Add a new option for each ProductDefinition in the database -->
 			@foreach (\App\PriceDefinition::all() as $priceDefinition)
 				<option value="{{ $priceDefinition->id }}"
@@ -58,22 +71,16 @@
 					Small - ${{ $priceDefinition->small }} Regular - ${{ $priceDefinition->regular }} Large - ${{ $priceDefinition->large }}
 				</option>
 			@endforeach
-			<option value="" 
-			@if (!is_null(Request::old('fixed_price')) || !is_null($product->fixed_price))
-				selected
-			@endif
-			>Use a fixed price</option>
 		</select>
 		<small class="form-text text-muted">Alternatively, you can specify a fixed price below.</small>
 	</div>
-	<div class="form-group">
+	<div class="form-group" id="fixed_price_form_group">
 		<label for="fixed_price">Fixed Price</label>
 		<div class="input-group">
 			<span class="input-group-addon">$</span>
 			<input type="text" class="form-control" id="fixed_price" name="fixed_price" 
 			value= "{{ Request::old('fixed_price') ? Request::old('fixed_price') : $product->fixed_price }}" />
 		</div>
-		<small class="form-text text-muted">This is useful for products with a single price such as food or retail products.</small>
 	</div>
 	<div class="btn-group">
 		<input type="submit" class="btn btn-primary" name="add_another" value="Save & Add Another">
@@ -84,4 +91,8 @@
 	{{ csrf_field() }}
 </form>
 
+@endsection
+
+@section('scripts')
+	<script src="{{ url('/js/admin/ProductForm.js') }}"></script>
 @endsection
