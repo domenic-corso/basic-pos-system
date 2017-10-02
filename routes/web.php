@@ -26,7 +26,9 @@ Route::get('/take-orders', function () {
 });
 
 Route::get('/add-product', function () {
-    return view('add_product');
+    return view('add_product', [
+    	'product' => new \App\Product()
+    ]);
 });
 
 Route::get('/product-list', function () {
@@ -37,9 +39,7 @@ Route::get('/product/{$product}', function (Product $product) {
     return dd($product);
 });
 
-Route::put('/product/', function (Request $request) {
-	return 'lmao';
-});
+Route::put('/product', 'ProductController@create');
 
 Route::post('/product/{$product}', function (Product $product) {
     return 'POST /product';

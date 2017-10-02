@@ -20,7 +20,13 @@
 		<select class="form-control" id="category_id" name="category_id">
 			<!-- Add a new option for each Category in the database -->
 			@foreach (\App\Category::all() as $category)
-				<option value="{{ $category->id }}">
+				<option value="{{ $category->id }}"
+					@if (Request::old('category_id') == $category->id)
+						selected
+					@elseif ($product->category_id == $category->id)
+						selected
+					@endif
+				>
 					{{ $category->name }}
 				</option>
 			@endforeach
@@ -28,11 +34,13 @@
 	</div>
 	<div class="form-group">
 		<label for="name">Name:</label>
-		<input type="text" class="form-control" id="name" name="name" placeholder="i.e. Cappucino, Soft Drink, Beef Pie etc." />
+		<input type="text" class="form-control" id="name" name="name" placeholder="i.e. Cappucino, Soft Drink, Beef Pie etc."
+		value="{{ Request::old('name') ? Request::old('name') : $product->name }}" />
 	</div>
 	<div class="form-group">
 		<label for="short_name">Short Name:</label>
-		<input type="text" class="form-control" id="short_name" name="short_name" />
+		<input type="text" class="form-control" id="short_name" name="short_name" 
+		value="{{ Request::old('short_name') ? Request::old('short_name') : $product->short_name }}" />
 		<small class="form-text text-muted">This name is displayed on the buttons when taking orders.</small>
 	</div>
 	<div class="form-group">
@@ -40,10 +48,21 @@
 		<select class="form-control" id="price_definition_id" name="price_definition_id">
 			<!-- Add a new option for each ProductDefinition in the database -->
 			@foreach (\App\PriceDefinition::all() as $priceDefinition)
-				<option value="{{ $priceDefinition->id }}">
+				<option value="{{ $priceDefinition->id }}"
+					@if (Request::old('price_definition_id') == $priceDefinition->id ||
+						$product->price_definition_id == $priceDefinition->id)
+
+						selected
+					@endif
+				>
 					Small - ${{ $priceDefinition->small }} Regular - ${{ $priceDefinition->regular }} Large - ${{ $priceDefinition->large }}
 				</option>
 			@endforeach
+			<option value="" 
+			@if (!is_null(Request::old('fixed_price')) || !is_null($product->fixed_price))
+				selected
+			@endif
+			>Use a fixed price</option>
 		</select>
 		<small class="form-text text-muted">Alternatively, you can specify a fixed price below.</small>
 	</div>
@@ -51,7 +70,8 @@
 		<label for="fixed_price">Fixed Price</label>
 		<div class="input-group">
 			<span class="input-group-addon">$</span>
-			<input type="text" class="form-control" id="fixed_price" name="fixed_price" />
+			<input type="text" class="form-control" id="fixed_price" name="fixed_price" 
+			value= "{{ Request::old('fixed_price') ? Request::old('fixed_price') : $product->fixed_price }}" />
 		</div>
 		<small class="form-text text-muted">This is useful for products with a single price such as food or retail products.</small>
 	</div>

@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-4">
     <div class="container">
-        <a class="navbar-brand" href="#">Basic POS System - Admin Panel</a>
+        <a class="navbar-brand" href="{{ url('/admin-panel') }}">Basic POS System - Admin Panel</a>
         <div class="navbar-collapse">
             <ul class="nav navbar-nav">
                 <a class="nav-item nav-link" href="{{ url('/add-product') }}">Add Product</a>
@@ -14,6 +14,11 @@
     </div>
 </nav>
 
-<div class="container">@yield('admin.content')</div>
+<div class="container">
+
+@include('partials.messages')
+@yield('admin.content')
+
+</div>
 
 @endsection
