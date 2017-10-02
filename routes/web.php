@@ -32,7 +32,7 @@ Route::get('/add-product', function () {
 });
 
 Route::get('/product-list', function () {
-    return 'Product Listing';
+    return view('product_list');
 });
 
 Route::get('/product/{$product}', function (Product $product) {
@@ -47,4 +47,9 @@ Route::post('/product/{$product}', function (Product $product) {
 
 Route::delete('/product/{$product}', function (Product $product) {
     return 'DELETE /product';
+});
+
+/* APIs/Data Retrieval */
+Route::get('/get-products-by-category', function (Request $request) {
+    return(\App\Category::getProductsByCategoryId($request->cid)->sortBy('created_at')->toJson());
 });

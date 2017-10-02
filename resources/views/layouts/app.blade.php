@@ -9,6 +9,7 @@
     </head>
     <body>
         @yield('app.content')
+        <script src="{{ url('/js/lib/BL.js') }}"></script>
         @yield('scripts')
     </body>
 </html>

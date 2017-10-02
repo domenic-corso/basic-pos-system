@@ -36,7 +36,7 @@ class ProductController extends Controller {
 			return redirect('/add-product');
 		}
 
-		return redirect('/admin-panel');
+		return redirect('/product-list');
 	}
 	
 }
