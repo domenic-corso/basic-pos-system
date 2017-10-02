@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\MessageBag;
 use Validator;
 
 class Product extends Model
@@ -34,20 +35,20 @@ class Product extends Model
 
 	/* Checks a given array of properties against the validator rules as well
 	as some business logic. Returns an array of error messages. */
-	public static function validateWithErrors (array $properties) : array {
+	public static function validateWithErrors (array $properties) : MessageBag {
 		$validator = Validator::make($properties, self::getValidatorRules());
 
 		/* If the properties are not valid and no price information at all was given,
 		invalid Product. */
 		if ($validator->fails()) {
-			return $validator->errors()->all();
+			return $validator->errors();
 		}
 
 		if (empty($properties['price_definition_id']) && empty($properties['fixed_price'])) {
-			return array('You must choose either a price group or a fixed price.');
+			return new MessageBag(array('You must choose either a price group or a fixed price.'));
 		}
 
-		return array();
+		return new MessageBag();
 	}
 
 	/* Calls 'validateWithErrors' but returns a boolean format. */
