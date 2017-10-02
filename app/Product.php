@@ -19,7 +19,7 @@ class Product extends Model
 		$product->fill($properties);
 
 		/* Round fixed price to nearest 5 cents. */
-		$product->fixed_price = round($product->fixed_price / 5, 2) * 5;
+		$product->fixed_price = doubleval(round($product->fixed_price / 5, 2) * 5);
 		$product->short_name = strtoupper($product->short_name);
 
 		/* If a price definition is provided, prioritize that and remove the fixed price data. */
@@ -44,8 +44,7 @@ class Product extends Model
 			return $validator->errors();
 		}
 
-		if (empty($properties['price_definition_id']) && empty($properties['fixed_price']) 
-			&& $properties['fixed_price'] != 0) {
+		if (empty($properties['price_definition_id']) && empty($properties['fixed_price'])) {
 			return new MessageBag(array('You must choose either a price group or a fixed price.'));
 		}
 
