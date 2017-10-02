@@ -44,7 +44,8 @@ class Product extends Model
 			return $validator->errors();
 		}
 
-		if (empty($properties['price_definition_id']) && empty($properties['fixed_price'])) {
+		if (empty($properties['price_definition_id']) && empty($properties['fixed_price']) 
+			&& $properties['fixed_price'] != 0) {
 			return new MessageBag(array('You must choose either a price group or a fixed price.'));
 		}
 
