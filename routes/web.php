@@ -41,6 +41,13 @@ Route::get('/edit-product/{product}', function (Product $product) {
     ]);
 });
 
+/* Delete Product - Confirmation */
+Route::get('/delete-product/{product}', function (Product $product) {
+    return view('delete_product', [
+        'product' => $product
+    ]);
+});
+
 Route::get('/product-list', function () {
     return view('product_list');
 });
@@ -57,9 +64,7 @@ Route::put('/product', 'ProductController@create');
 Route::post('/product/{product}', 'ProductController@update');
 
 /* Delete Product */
-Route::delete('/product/{product}', function (Product $product) {
-    return 'DELETE /product';
-});
+Route::delete('/product/{product}', 'ProductController@delete');
 
 /* APIs/Data Retrieval */
 Route::get('/get-products-by-category', function (Request $request) {

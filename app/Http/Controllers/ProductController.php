@@ -68,4 +68,15 @@ class ProductController extends Controller {
         return redirect('/product-list');
     }
 
+    public function delete (Request $request, Product $product) {
+        /* Delete product from database. */
+        $product->delete();
+
+        /* Add flash message for user to confirm deletion. */
+        $request->session()->flash('success', $product->name . ' has been deleted.');
+
+        /* Redirect back to the product listing page. */
+        return redirect('product-list');
+    }
+
 }
