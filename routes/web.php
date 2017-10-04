@@ -2,6 +2,8 @@
 
 use \Illuminate\Http\Request;
 
+use \App\Product;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +29,13 @@ Route::get('/take-orders', function () {
 
 Route::get('/add-product', function () {
     return view('add_product', [
-    	'product' => new \App\Product()
+    	'product' => new Product()
+    ]);
+});
+
+Route::get('/edit-product/{product}', function (Product $product) {
+    return view('edit_product', [
+        'product' => new Product()
     ]);
 });
 
@@ -35,17 +43,17 @@ Route::get('/product-list', function () {
     return view('product_list');
 });
 
-Route::get('/product/{$product}', function (Product $product) {
+Route::get('/product/{product}', function (Product $product) {
     return dd($product);
 });
 
 Route::put('/product', 'ProductController@create');
 
-Route::post('/product/{$product}', function (Product $product) {
+Route::post('/product/{product}', function (Product $product) {
     return 'POST /product';
 });
 
-Route::delete('/product/{$product}', function (Product $product) {
+Route::delete('/product/{product}', function (Product $product) {
     return 'DELETE /product';
 });
 
