@@ -65,6 +65,9 @@ class ProductController extends Controller {
         /* Reflect the changes in the database. */
         $product->save();
 
+        /* Add flash message for user to confirm deletion. */
+        $request->session()->flash('success', 'The changes for ' . $product->name . ' have been saved.');
+
         return redirect('/product-list');
     }
 
