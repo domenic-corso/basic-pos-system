@@ -35,7 +35,7 @@ Route::get('/add-product', function () {
 
 Route::get('/edit-product/{product}', function (Product $product) {
     return view('edit_product', [
-        'product' => new Product()
+        'product' => $product
     ]);
 });
 
