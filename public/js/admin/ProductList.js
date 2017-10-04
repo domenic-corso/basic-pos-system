@@ -54,6 +54,7 @@ ProductList.generateTableRow = function (product) {
 	let shortNameTd = document.createElement('td');
 	let categoryTd = document.createElement('td');
 	let optionsTd = document.createElement('td');
+    let priceTd = document.createElement('td');
 	let editBtn = document.createElement('a');
 	let deleteBtn = document.createElement('a');
 
@@ -64,6 +65,8 @@ ProductList.generateTableRow = function (product) {
 	/* Get full name of the category based off the ID. */
 	let categoryIdInt = parseInt(product.category_id);
 	categoryTd.appendChild(document.createTextNode(this.categories.get(categoryIdInt)));
+
+    priceTd.innerHTML = product.price_long;
 
 	/* Set up the edit button. */
 	editBtn.setAttribute('href', './edit-product/' + product.id);
@@ -82,6 +85,7 @@ ProductList.generateTableRow = function (product) {
 	row.appendChild(nameTd);
 	row.appendChild(shortNameTd);
 	row.appendChild(categoryTd);
+	row.appendChild(priceTd);
 	row.appendChild(optionsTd);
 
 	return row;

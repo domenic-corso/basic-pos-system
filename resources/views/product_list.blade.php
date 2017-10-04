@@ -34,6 +34,7 @@
 			<th>Name</th>
 			<th>Short Name</th>
 			<th>Category</th>
+			<th>Price</th>
 			<th>Options</th>
 		</tr>
 	</thead>
