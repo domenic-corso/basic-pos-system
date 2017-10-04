@@ -59,11 +59,11 @@ class Product extends Model
     private static function getValidatorRules (bool $allowDuplicates = false) : array {
     	$namePattern = '/^[a-z\d &\']+$/i';
 
-        $uniqueRule = ($allowDuplicates) ? 'unique:products' : '';
+        $uniqueRule = ($allowDuplicates) ? '' : 'unique:products';
 
     	return [
     		'name' => 'required|' . $uniqueRule . '|min:3|max:60|filled|regex:'.$namePattern,
-    		'short_name' => 'required|' . $uniqueRule . '|min:3|max:12|filled|regex:'.$namePattern,
+    		'short_name' => 'required|min:3|max:12|filled|regex:'.$namePattern,
     		'category_id' => 'required|integer|exists:categories,id',
     		'price_definition_id' => 'integer|exists:price_definitions,id|nullable',
     		'fixed_price' => 'numeric|min:0|max:50|nullable'
