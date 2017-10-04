@@ -36,7 +36,7 @@
 			@foreach (\App\PriceDefinition::all() as $priceDefinition)
 				<option value="{{ $priceDefinition->id }}"
 					@if (Request::old('price_definition_id') == $priceDefinition->id ||
-						$product->price_definition_id == $priceDefinition->id)
+						($product->price_definition_id == $priceDefinition->id && empty(Request::old('fixed_price'))) )
 
 						selected
 					@endif
