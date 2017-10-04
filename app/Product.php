@@ -9,6 +9,28 @@ use Validator;
 class Product extends Model
 {
 	protected $fillable = ['name', 'short_name', 'category_id', 'price_definition_id', 'fixed_price'];
+    protected $appends = ['price_long', 'price_short'];
+
+    /* Create accessors for relationships. */
+    public function category () { return $this->belongsTo('App\Category'); }
+    public function price_definition () { return $this->belongsTo('App\PriceDefinition'); }
+
+
+    public function getPriceLongAttribute () : string {
+        if (!empty($this->price_definition)) {
+            return $this->price_definition->toStringMultipleLines();
+        }
+
+        return 'Fixed Price - $' .  htmlentities(number_format($this->fixed_price, 2));
+    }
+
+    public function getPriceShortAttribute () : string {
+        if (!empty($this->price_definition)) {
+            return $this->price_definition->toStringSingleLine();
+        }
+
+        return '$' . htmlentities(number_format($this->fixed_price, 2));
+    }
 
 	/* This function takes care of any business logic given an array of properties.
 	This includes:
