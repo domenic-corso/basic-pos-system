@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $fillable = ['total', 'discounted', 'discount_description'];
+
     /* The register will add orders to the system by POST'ing a JSON string
     containing order information. This needs to be validated and made sure
     it's in the right format or else the system will reject the order.
@@ -112,6 +114,7 @@ class Order extends Model
         foreach ($processed["order_items"] as $ordItem) {
             $processed["total"] += $ordItem["total"];
         }
+        $processed["total"] = number_format($processed["total"], 2);
 
         /* Calculate promotions. */
         $promotionResult = Promotions::findPromotion($orderItemList);

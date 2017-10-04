@@ -74,5 +74,7 @@ Route::get('/get-products-by-category', function (Request $request) {
 Route::get('/get-order-price-information', function (Request $request) {
     if (!empty($request->order_json)) {
         return json_encode(\App\Order::processJsonOrder($request->order_json));
-    } return 'NULL';
+    } return 'BAD_FORMAT';
 });
+
+Route::get('/save-order', 'OrderController@store');
