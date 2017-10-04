@@ -55,7 +55,3 @@
 			value= "{{ Request::old('fixed_price') ? Request::old('fixed_price') : $product->fixed_price }}" />
 		</div>
 	</div>
-	<div class="btn-group">
-		<input type="submit" class="btn btn-primary" name="add_another" value="Save & Add Another">
-		<input type="submit" class="btn btn-success" value="Save">
-	</div>

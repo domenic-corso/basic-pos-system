@@ -26,6 +26,12 @@
 
 <form action="{{ url('/product') }}" method="post">
     @include('partials.product_form')
+    
+	<div class="btn-group">
+		<input type="submit" class="btn btn-primary" name="add_another" value="Save & Add Another">
+		<input type="submit" class="btn btn-success" value="Save">
+	</div>
+
 	{{ method_field('put') }}
 	{{ csrf_field() }}
 </form>
