@@ -35,8 +35,8 @@ class Product extends Model
 
 	/* Checks a given array of properties against the validator rules as well
 	as some business logic. Returns an array of error messages. */
-	public static function validateWithErrors (array $properties) : MessageBag {
-		$validator = Validator::make($properties, self::getValidatorRules());
+	public static function validateWithErrors (array $properties, bool $allowDuplicates = false) : MessageBag {
+		$validator = Validator::make($properties, self::getValidatorRules($allowDuplicates));
 
 		/* If the properties are not valid and no price information at all was given,
 		invalid Product. */
@@ -52,16 +52,18 @@ class Product extends Model
 	}
 
 	/* Calls 'validateWithErrors' but returns a boolean format. */
-	public static function validateProduct (array $properties) : bool {
-		return (count(self::validateWithErrors($properties)) == 0);
+	public static function validateProduct (array $properties, bool $allowDuplicates = false) : bool {
+		return (count(self::validateWithErrors($properties, $allowDuplicates)) == 0);
 	}
 
-    private static function getValidatorRules () : array {
+    private static function getValidatorRules (bool $allowDuplicates = false) : array {
     	$namePattern = '/^[a-z\d &\']+$/i';
 
+        $uniqueRule = ($allowDuplicates) ? 'unique:products' : '';
+
     	return [
-    		'name' => 'required|unique:products|min:3|max:60|filled|regex:'.$namePattern,
-    		'short_name' => 'required|unique:products|min:3|max:12|filled|regex:'.$namePattern,
+    		'name' => 'required|' . $uniqueRule . '|min:3|max:60|filled|regex:'.$namePattern,
+    		'short_name' => 'required|' . $uniqueRule . '|min:3|max:12|filled|regex:'.$namePattern,
     		'category_id' => 'required|integer|exists:categories,id',
     		'price_definition_id' => 'integer|exists:price_definitions,id|nullable',
     		'fixed_price' => 'numeric|min:0|max:50|nullable'
