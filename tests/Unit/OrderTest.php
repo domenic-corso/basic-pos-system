@@ -20,6 +20,22 @@ class OrderTest extends TestCase
                 {
                     "product_id": 3,
                     "size": "fixed"
+                },
+                {
+                    "product_id": 2,
+                    "size": "small"
+                },
+                {
+                    "product_id": 3,
+                    "size": "fixed"
+                },
+                {
+                    "product_id": 2,
+                    "size": "small"
+                },
+                {
+                    "product_id": 3,
+                    "size": "fixed"
                 }
             ]
         }';

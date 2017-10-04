@@ -91,4 +91,8 @@ class Product extends Model
     		'fixed_price' => 'numeric|min:0|max:50|nullable'
     	];
     }
+
+    public static function round5Cents ($price) {
+        return doubleval(round($price / 5, 2) * 5);
+    }
 }

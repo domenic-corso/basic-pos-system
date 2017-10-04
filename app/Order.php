@@ -72,13 +72,12 @@ class Order extends Model
         $processed["discount_description"] = "";
         $processed["order_items"] = array();
 
-        $productList = array();
+        $orderItemList = array();
 
         /* Process each order item. */
         foreach ($orderItems as $ordItem) {
             /* Resolve the product_id attribute of $ordItem to a Product Instance. */
             $productInstance = Product::find($ordItem->product_id);
-            $productList[] = $productInstance;
 
             $product_name = $productInstance->name;
             $size = $ordItem->size;
@@ -99,11 +98,14 @@ class Order extends Model
             }
 
             /* Format OrderItem array, readable by the client register. */
-            $processed["order_items"][] = array (
+            $orderItemAssocArray = array (
                 "product_name" => $product_name,
                 "size" => $size,
                 "total" => floatval($total)
             );
+
+            $processed["order_items"][] = $orderItemAssocArray;
+            $orderItemList[] = new OrderItem($orderItemAssocArray);
         }
 
         /* Find the total. */
@@ -112,8 +114,8 @@ class Order extends Model
         }
 
         /* Calculate promotions. */
-        $promotionResult = Promotions::findPromotions($productList);
-        $processed["discounted"] = $promotionResult["discounted"];
+        $promotionResult = Promotions::findPromotion($orderItemList);
+        $processed["discounted"] = $promotionResult["discount"];
         $processed["discount_description"] = $promotionResult["description"];
 
         var_dump($processed);
