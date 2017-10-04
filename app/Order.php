@@ -118,8 +118,6 @@ class Order extends Model
         $processed["discounted"] = $promotionResult["discount"];
         $processed["discount_description"] = $promotionResult["description"];
 
-        var_dump($processed);
-
         return $processed;
     }
 }
