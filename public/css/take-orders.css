@@ -1,0 +1,174 @@
+#take-orders-container {
+    width: 700px;
+    height: 700px;
+    border: 1px solid #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin: 10px auto;
+}
+
+#take-orders-container * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+#take-orders-top {
+    height: 8%;
+    display: flex;
+}
+
+#take-orders-top > * {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+}
+
+#take-orders-title {
+    flex-grow: 1;
+    background-color: #AAA;
+}
+
+#take-orders-time-date {
+    text-align: right;
+    background-color: #FFF;
+    border-left: 1px solid #000;
+}
+
+#take-orders-middle {
+    height: 75%;
+    background-color: #BBB;
+    display: flex;
+}
+
+#take-orders-left-panel {
+    width: 35%;
+    padding: 1%;
+    background-color: #FFF;
+}
+
+#take-orders-order-item-list {
+    height: 76%;
+}
+
+.take-orders-order-item {
+    display: flex;
+    font-weight: bold;
+    padding: 2%;
+    cursor: pointer;
+}
+
+.take-orders-order-item > div {
+    flex-grow: 1;
+}
+
+.selected-order-item {
+    background-color: #CCFEFF;
+}
+
+.take-orders-order-item-price {
+    padding-left: 10px;
+    text-align: right;
+}
+
+#take-orders-promotion-description {
+    height: 10%;
+    font-size: 85%;
+}
+
+#take-orders-discount-cont {
+    height: 7%;
+}
+
+#take-orders-total-price-cont {
+    height: 7%;
+}
+
+#take-orders-discount-cont, #take-orders-total-price-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#take-orders-buttons-cont {
+    width: 65%;
+    background-color: aqua;
+    position: relative;
+}
+
+#take-orders-size-buttons-cont {
+    height: 15%;
+    display: flex;
+}
+
+#take-orders-size-buttons-cont > button {
+    flex-grow: 1;
+}
+
+.size-btn-selected {
+    font-weight: bold;
+}
+
+#take-orders-cash-input-overlay {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: #EEE;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+}
+
+#take-orders-cash-input {
+    background-color: #FFF;
+    padding: 10px;
+    font-size: 175%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+#take-orders-cash-input-digits-cont {
+    height: 1%; /* To allow flex-grow to work */
+    flex-grow: 1;
+}
+
+#take-orders-cash-input-digits-cont > button {
+    display: block;
+    float: left;
+    width: 33.33%;
+    height: 25%;
+    font-size: 175%;
+    font-weight: bold;
+}
+
+#take-orders-category-buttons-cont {
+    height: 15%;
+    display: flex;
+}
+
+#take-orders-category-buttons-cont > button {
+    flex-grow: 1;
+}
+
+#take-orders-product-buttons-cont {
+    height: 70%;
+}
+
+#take-orders-product-buttons-cont > button {
+    display: block;
+    float: left;
+    font-size: 75%;
+    overflow: hidden;
+    text-overflow: clip;
+    padding: 5px;
+}
+
+#take-orders-bottom {
+    height: 17%;
+    background-color: #AAA;
+    display: flex;
+}
+
+#take-orders-bottom > button {
+    flex-basis: 0;
+    flex-grow: 1;
+}
