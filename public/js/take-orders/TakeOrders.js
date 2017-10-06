@@ -6,7 +6,7 @@ let TakeOrders = {
     CHECK_ORDER_URL: 'get-order-price-information',
     INSERT_ORDER_URL: 'save-order',
 
-    PRODUCT_BTNS_WIDTH: 5,
+    PRODUCT_BTNS_WIDTH: 4,
     PRODUCT_BTNS_HEIGHT: 4,
 
     STARTING_SIZE: 'regular',
@@ -113,7 +113,7 @@ TakeOrders.addListeners = function () {
         window.location.href = '/';
     });
     this.e.btnViewOrders.addEventListener('click', () => {
-        window.open('/list-orders');
+        window.open('/order-list');
     });
     this.e.btnClear.addEventListener('click', () => { this.order.clear() });
     this.e.btnVoid.addEventListener('click', () => { this.order.void() });

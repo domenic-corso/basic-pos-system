@@ -20,16 +20,18 @@
     <div id="take-orders-middle">
         <div id="take-orders-left-panel">
             <div id="take-orders-order-item-list"></div>
-            <div id="take-orders-promotion-description">
-                Buy 1 at 10% off
-            </div>
             <div id="take-orders-discount-cont">
                 <strong>DISCOUNTS: </strong>
-                <span id="take-orders-discount-text">-$1.25</span>
+                <span id="take-orders-discount-text">-$0.00</span>
+            </div>
+            <div id="take-orders-promotion-description"></div>
+            <div id="take-orders-total-price-cont">
+                <strong>SUBTOTAL: </strong>
+                <span id="take-orders-sub-total-text">$0.00</span>
             </div>
             <div id="take-orders-total-price-cont">
                 <strong>TOTAL: </strong>
-                <span id="take-orders-total-text">$4.50</span>
+                <span id="take-orders-total-text">$0.00</span>
             </div>
         </div>
         <div id="take-orders-buttons-cont">

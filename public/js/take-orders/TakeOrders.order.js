@@ -3,6 +3,7 @@ TakeOrders.order = {
         orderItemList: document.getElementById('take-orders-order-item-list'),
         promotionDescription: document.getElementById('take-orders-promotion-description'),
         discountText: document.getElementById('take-orders-discount-text'),
+        subTotalText: document.getElementById('take-orders-sub-total-text'),
         totalPriceText: document.getElementById('take-orders-total-text')
     },
 
@@ -61,12 +62,16 @@ TakeOrders.order.setPromotionText = function (text) {
     this.helpers.setText(this.e.promotionDescription, text);
 };
 
-TakeOrders.order.setDiscountText = function (text) {
-    this.helpers.setText(this.e.discountText, '-$' + text.toFixed(2));
+TakeOrders.order.setDiscountText = function (dVal) {
+    this.helpers.setText(this.e.discountText, '-$' + dVal.toFixed(2));
 };
 
-TakeOrders.order.setTotalText = function (text) {
-    this.helpers.setText(this.e.totalPriceText, '$' + text.toFixed(2));
+TakeOrders.order.setSubTotalText = function (dVal) {
+    this.helpers.setText(this.e.subTotalText, '$' + dVal.toFixed(2));
+};
+
+TakeOrders.order.setTotalText = function (dVal) {
+    this.helpers.setText(this.e.totalPriceText, '$' + dVal.toFixed(2));
 };
 
 TakeOrders.order.updateDom = function () {
@@ -85,6 +90,13 @@ TakeOrders.order.updateDom = function () {
     }
 };
 
+TakeOrders.order.resetPriceInfoDom = function () {
+    this.setPromotionText('');
+    this.setDiscountText(0);
+    this.setSubTotalText(0);
+    this.setTotalText(0);
+};
+
 TakeOrders.order.handleOrderCheckResponse = function (response) {
     let responseObj;
 
@@ -96,6 +108,7 @@ TakeOrders.order.handleOrderCheckResponse = function (response) {
 
     this.setDiscountText(parseFloat(responseObj.discounted));
     this.setPromotionText(responseObj.discount_description);
+    this.setSubTotalText(parseFloat(responseObj.sub_total));
     this.setTotalText(parseFloat(responseObj.total));
 };
 
@@ -108,9 +121,7 @@ TakeOrders.order.update = function () {
             this.handleOrderCheckResponse.bind(this));
     }
     else {
-        this.setPromotionText('');
-        this.setDiscountText(0);
-        this.setTotalText(0);
+        this.resetPriceInfoDom();
     }
 };
 
@@ -123,9 +134,7 @@ TakeOrders.order.sendOrder = function () {
 };
 
 TakeOrders.order.clear = function () {
-    this.setPromotionText('');
-    this.setDiscountText(0);
-    this.setTotalText(0);
+    this.resetPriceInfoDom();
 
     this.orderItems = [];
     this.activeOrderItem = [];
@@ -155,7 +164,7 @@ TakeOrders.order.eftpos = function () {
 };
 
 TakeOrders.order.cash = function () {
-    console.log("Selected CASH");
+    this.sendOrder();
 };
 
 TakeOrders.order.addOrderItem = function (orderItem) {
