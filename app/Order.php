@@ -3,10 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
     protected $fillable = ['total', 'discounted', 'discount_description'];
+
+    public function order_items () : HasMany {
+        return $this->hasMany('App\OrderItem');
+    }
 
     /* The register will add orders to the system by POST'ing a JSON string
     containing order information. This needs to be validated and made sure
@@ -51,6 +56,7 @@ class Order extends Model
     /* This will accept a JSON String Order and process it into an associative
     array of format: [
         "total": 0.00,
+        "subtotal": 0.00,
         "discounted": 0.00,
         "discount_description": "",
         "order_items": [
@@ -70,6 +76,7 @@ class Order extends Model
         $processed = array();
 
         $processed["total"] = 0.00;
+        $processed["sub_total"] = 0.00;
         $processed["discounted"] = 0.00;
         $processed["discount_description"] = "";
         $processed["order_items"] = array();
@@ -112,14 +119,17 @@ class Order extends Model
 
         /* Find the total. */
         foreach ($processed["order_items"] as $ordItem) {
-            $processed["total"] += $ordItem["total"];
+            $processed["sub_total"] += $ordItem["total"];
         }
-        $processed["total"] = number_format($processed["total"], 2);
+
+        $processed["sub_total"] = number_format($processed["sub_total"], 2);
 
         /* Calculate promotions. */
         $promotionResult = Promotions::findPromotion($orderItemList);
         $processed["discounted"] = $promotionResult["discount"];
         $processed["discount_description"] = $promotionResult["description"];
+
+        $processed["total"] = number_format(floatval($processed["sub_total"]) - floatval($processed["discounted"]), 2);
 
         return $processed;
     }

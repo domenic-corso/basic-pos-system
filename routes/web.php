@@ -48,6 +48,10 @@ Route::get('/delete-product/{product}', function (Product $product) {
     ]);
 });
 
+Route::get('order-list', function () {
+    return view('order_list'); 
+});
+
 Route::get('/product-list', function () {
     return view('product_list');
 });
