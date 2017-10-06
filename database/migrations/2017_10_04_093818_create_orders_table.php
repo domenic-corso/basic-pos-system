@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->double('total', 7, 2);
+            $table->double('sub_total', 7, 2);
             $table->double('discounted', 7, 2);
             $table->string('discount_description');
             $table->timestamps();

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
-    protected $fillable = ['total', 'discounted', 'discount_description'];
+    protected $fillable = ['sub_total', 'total', 'discounted', 'discount_description'];
 
     public function order_items () : HasMany {
         return $this->hasMany('App\OrderItem');
