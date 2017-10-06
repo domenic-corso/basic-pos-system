@@ -71,6 +71,10 @@ Route::get('/get-products-by-category', function (Request $request) {
     return(\App\Category::getProductsByCategoryId($request->cid)->sortBy('created_at')->toJson());
 });
 
+Route::get('/get-categories', function () {
+    return(\App\Category::all()->toJson()); 
+});
+
 Route::get('/get-order-price-information', function (Request $request) {
     if (!empty($request->order_json)) {
         return json_encode(\App\Order::processJsonOrder($request->order_json));

@@ -9,7 +9,7 @@ use Validator;
 class Product extends Model
 {
 	protected $fillable = ['name', 'short_name', 'category_id', 'price_definition_id', 'fixed_price'];
-    protected $appends = ['price_long', 'price_short'];
+    protected $appends = ['price_long', 'price_short', 'category_name'];
 
     /* Create accessors for relationships. */
     public function category () { return $this->belongsTo('App\Category'); }
@@ -30,6 +30,11 @@ class Product extends Model
         }
 
         return '$' . htmlentities(number_format($this->fixed_price, 2));
+    }
+
+    public function getCategoryNameAttribute () : string {
+        $categoryName = $this->category->name;
+        return "$categoryName";
     }
 
 	/* This function takes care of any business logic given an array of properties.
