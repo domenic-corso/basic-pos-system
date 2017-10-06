@@ -14,21 +14,12 @@
             Basic POS System - ShopFront Demo
         </div>
         <div id="take-orders-time-date">
-            05/10/2017 1:11PM
+            DD/MM/YYYY HH:MM
         </div>
     </div>
     <div id="take-orders-middle">
         <div id="take-orders-left-panel">
-            <div id="take-orders-order-item-list">
-                <div class="take-orders-order-item">
-                    <div class="take-orders-order-item-name">
-                        SML CAPP
-                    </div>
-                    <div class="take-orders-order-item-price">
-                        $3.90
-                    </div>
-                </div>
-            </div>
+            <div id="take-orders-order-item-list"></div>
             <div id="take-orders-promotion-description">
                 Buy 1 at 10% off
             </div>

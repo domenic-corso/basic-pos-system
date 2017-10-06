@@ -72,7 +72,7 @@ Route::get('/get-products-by-category', function (Request $request) {
 });
 
 Route::get('/get-categories', function () {
-    return(\App\Category::all()->toJson()); 
+    return(\App\Category::all()->toJson());
 });
 
 Route::get('/get-order-price-information', function (Request $request) {
