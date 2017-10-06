@@ -11,7 +11,7 @@
 <div id="take-orders-container">
     <div id="take-orders-top">
         <div id="take-orders-title">
-            Basic POS System - ShopFront Demo
+            Basic POS System - ShopFront Test
         </div>
         <div id="take-orders-time-date">
             DD/MM/YYYY HH:MM
